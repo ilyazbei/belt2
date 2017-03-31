@@ -1,0 +1,71 @@
+<title>Bid Now!</title>
+<div ng-controller = "userController" class="container col-sm-12">
+  <div ng-controller = "bidController" class="well">
+    <div class="row">
+      <div class="control-group col-sm-4">
+        <h1 class="controller">Bid Now!</h1>
+      </div>
+      <div class="control-group col-sm-1  col-sm-offset-7">
+        <!-- Button -->
+        <div class="controls">
+          <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+        </div>
+      </div>
+    </div><!-- row ends header-->
+
+    <div class="row">
+      <!-- Product 1 -->
+      <!-- Front end Validation error fieled -->
+      <div ng-if="error" class="alert alert-danger ">
+        <p>{{ error }}</p>
+      </div>
+
+      <div ng-repeat="product in [0,1,2]" class="well col-sm-4">
+        <legend>Product {{ product+1 }}</legend>
+        <form class="form-inline" ng-submit = "createBid(product)">
+
+          <div class="form-group">
+            $ <input ng-model="newBids[product]" type="number" class="form-control input-xlarge">
+          </div>
+
+          <div class="form-group">
+            <!-- Button -->
+            <button class="btn btn-primary">Bid</button>
+          </div>
+
+        </form><br><!--Bid 1 Form ends here-->
+
+        <div class="table-responsiv">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Current Bids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-if="bid.product == product" ng-repeat = "bid in bids | filter: searchText">
+                <td>{{ bid._user }} ${{ bid.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="controls">
+            <input ng-model="searchText" placeholder="Search name & bid amount" class="form-control input-xlarge">
+          </div>
+        </div>
+      </div>
+
+
+    </div><!-- row ends header-->
+
+
+    <div class="row">
+      <div class="control-group col-sm-1  col-sm-offset-11">
+        <!-- Button -->
+        <div class="controls">
+          <button ng-click="endBid()" class="btn btn-primary">End Bid</button>
+        </div>
+      </div>
+    </div><!-- row ends header-->
+
+  </div><!-- well ends here-->
+</div> <!-- container 1 ends here -->
